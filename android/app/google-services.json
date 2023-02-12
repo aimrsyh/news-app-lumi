@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "369960178948",
+    "project_id": "lumi-news-data",
+    "storage_bucket": "lumi-news-data.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369960178948:android:7c191fc1d23bcd7bd9ec51",
+        "android_client_info": {
+          "package_name": "com.example.lumiNews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369960178948-1p72t7vehrsc5iugm1naigc161gf2rmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf1IZQk9_95ao-KrIKc7upH2QME5w3APg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369960178948-1p72t7vehrsc5iugm1naigc161gf2rmd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "369960178948-84rcimv6lmlli2kejvd02co6kqk7brag.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lumiNews"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
