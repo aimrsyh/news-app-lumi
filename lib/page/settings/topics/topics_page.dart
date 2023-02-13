@@ -13,16 +13,6 @@ class TopicPage extends StatefulWidget {
 class _TopicPageState extends State<TopicPage> {
   final List<String> topics = ['Trending  🔥', 'News  ☕️'];
   List<bool> isSelected = [false, false];
-  //List<bool> get selectedTopics => isSelected;
-
-  List<String> getSelectedTopics() {
-    return topics
-        .asMap()
-        .entries
-        .where((entry) => isSelected[entry.key])
-        .map((entry) => entry.value)
-        .toList();
-  }
 
   void onTap(int index) {
     setState(() {
@@ -52,14 +42,14 @@ class _TopicPageState extends State<TopicPage> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  // get selectedTopics {
-  //   return topics
-  //       .asMap()
-  //       .entries
-  //       .where((entry) => isSelected[entry.key])
-  //       .map((entry) => entry.value)
-  //       .toList();
-  // }
+  get selectedTopics {
+    return topics
+        .asMap()
+        .entries
+        .where((entry) => isSelected[entry.key])
+        .map((entry) => entry.value)
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
