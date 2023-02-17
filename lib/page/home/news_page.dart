@@ -3,8 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:lumi_news/bloc/news_bloc.dart';
+import 'package:lumi_news/bloc/news_events.dart';
 import 'package:lumi_news/page/settings/topics/topics_page.dart';
+import 'package:lumi_news/repo/news_repo.dart';
 import 'package:lumi_news/utils/colors.dart';
 import 'package:lumi_news/widgets/news_card.dart';
 import 'package:lumi_news/utils/dimensions.dart';
@@ -23,19 +27,13 @@ class _NewsPageState extends State<NewsPage>
   String _bigTitle = "";
   String _smallTitle = "";
 
-  final CollectionReference latest =
-      FirebaseFirestore.instance.collection('latest');
-  final CollectionReference trending =
-      FirebaseFirestore.instance.collection('trending');
-  final CollectionReference news =
-      FirebaseFirestore.instance.collection('news');
-
   TopicPage topicPage = TopicPage();
 //_TopicPageState topicPageState = topicPage.createState();
 
   @override
   void initState() {
     super.initState();
+
     _tabController = TabController(length: 1 + 2, vsync: this);
     _updateAppBarTitle();
   }
@@ -61,8 +59,6 @@ class _NewsPageState extends State<NewsPage>
 
   @override
   Widget build(BuildContext context) {
-    //List<String> selectedTopics = topicPage.getSelectedTopics();
-
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -117,7 +113,7 @@ class _NewsPageState extends State<NewsPage>
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                 tabs: [
                   Tab(text: "Latest  ⚡️"),
-                  Tab(text: "Trening  🔥"),
+                  Tab(text: "Trending  🔥"),
                   Tab(text: "News  ☕️"),
                 ],
                 controller: _tabController,
@@ -127,15 +123,12 @@ class _NewsPageState extends State<NewsPage>
         },
         body: TabBarView(
           children: <Widget>[
-            NewsCard(
-              collectionReference: latest,
-            ),
-            NewsCard(
-              collectionReference: trending,
-            ),
-            NewsCard(
-              collectionReference: news,
-            ),
+            BlocProvider<NewsBloc>(
+                create: (context) => NewsBloc(
+                    newsRepo: RepositoryProvider.of<NewsRepo>(context)),
+                child: NewsCard()),
+            NewsCard(),
+            NewsCard(),
           ],
           controller: _tabController,
         ),
