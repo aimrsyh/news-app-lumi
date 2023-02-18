@@ -11,22 +11,23 @@ import 'package:lumi_news/bloc/news_state.dart';
 import 'package:lumi_news/model/news_model.dart';
 import 'package:lumi_news/page/home/news_details_page.dart';
 
-class NewsCard extends StatefulWidget {
-  NewsCard({
+class NewsCardTrending extends StatefulWidget {
+  NewsCardTrending({
     super.key,
   });
 
   @override
-  State<NewsCard> createState() => _NewsCardState();
+  State<NewsCardTrending> createState() => _NewsCardTrendingState();
 }
 
-class _NewsCardState extends State<NewsCard> {
+class _NewsCardTrendingState extends State<NewsCardTrending> {
   PageController? _controller;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    BlocProvider.of<NewsBloc>(context).add(GetNewsData());
+    BlocProvider.of<NewsBloc>(context).add(GetDataTrending());
   }
 
   @override
@@ -71,16 +72,16 @@ class _NewsCardState extends State<NewsCard> {
                             shape: StadiumBorder(),
                             width: 230);
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => NewsDetails(
-                        //       link: '${thisItem['link']}',
-                        //       image: '${thisItem['publisherImageUrl']}',
-                        //       title: '${thisItem['publisherName']}',
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NewsDetails(
+                              link: data[index].link,
+                              title: data[index].publisherName,
+                              image: data[index].publisherImageUrl,
+                            ),
+                          ),
+                        );
                       },
                       child: Card(
                         elevation: 3,
@@ -114,6 +115,9 @@ class _NewsCardState extends State<NewsCard> {
                                         color: Colors.grey,
                                         fontSize: 12,
                                       ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
                                     ),
                                     Text(
                                       data[index].newsTitle,

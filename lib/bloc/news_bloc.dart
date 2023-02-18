@@ -10,7 +10,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     final NewsRepo newsRepo = NewsRepo();
 
     on<NewsEvent>((event, emit) async {
-      if (event is GetNewsData) {
+      if (event is GetDataLatest) {
         emit(NewsLoading());
         await Future.delayed(const Duration(seconds: 1));
         try {

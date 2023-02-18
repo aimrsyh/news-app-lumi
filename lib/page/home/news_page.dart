@@ -10,8 +10,10 @@ import 'package:lumi_news/bloc/news_events.dart';
 import 'package:lumi_news/page/settings/topics/topics_page.dart';
 import 'package:lumi_news/repo/news_repo.dart';
 import 'package:lumi_news/utils/colors.dart';
-import 'package:lumi_news/widgets/news_card.dart';
+import 'package:lumi_news/widgets/news_card_latest.dart';
 import 'package:lumi_news/utils/dimensions.dart';
+import 'package:lumi_news/widgets/news_card_news.dart';
+import 'package:lumi_news/widgets/news_card_trending.dart';
 import 'package:lumi_news/widgets/tab_container_widget.dart';
 
 class NewsPage extends StatefulWidget {
@@ -121,16 +123,19 @@ class _NewsPageState extends State<NewsPage>
             ),
           ];
         },
-        body: TabBarView(
-          children: <Widget>[
-            BlocProvider<NewsBloc>(
-                create: (context) => NewsBloc(
-                    newsRepo: RepositoryProvider.of<NewsRepo>(context)),
-                child: NewsCard()),
-            NewsCard(),
-            NewsCard(),
-          ],
-          controller: _tabController,
+        body: BlocProvider<NewsBloc>(
+          create: (context) =>
+              NewsBloc(newsRepo: RepositoryProvider.of(context)),
+          child: TabBarView(
+            children: <Widget>[
+              NewsCardLatest(
+                  // BlocProvider.of<NewsBloc>(context).add(GetDataLatest());
+                  ),
+              NewsCardTrending(),
+              NewsCardNews(),
+            ],
+            controller: _tabController,
+          ),
         ),
       ),
     );

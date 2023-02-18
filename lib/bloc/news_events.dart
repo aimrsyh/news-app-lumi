@@ -4,8 +4,8 @@ abstract class NewsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class GetNewsData extends NewsEvent {
-  GetNewsData();
+class GetDataLatest extends NewsEvent {
+  GetDataLatest();
 }
 
 class GetDataTrending extends NewsEvent {}
